@@ -35,9 +35,9 @@ sudo bash -c 'echo "nameserver 1.1.1.1" > /etc/resolv.conf'
 sudo chattr +i /etc/resolv.conf
 
 if [[ "$DNS_CONFIG" == "$EXPECTED_DNS_CONFIG" ]]; then
-  printf "Your DNS has been successfully configured with the following configuration:\n" 
+  printf "Your DNS has been successfully configured with the following configuration:\n"
   echo $(cat /etc/resolv.conf)
-  echo 
+  echo
 else
   echo "Could not configure your DNS, if you are having trouble fetching updates from ubuntu servers, try configuring it manually."
 fi
@@ -55,8 +55,6 @@ echo
 
 #DNS CONFIGURATION END-----------------------------------------------------------------------
 
-
-
 #DOCKER INSTALL INIT--------------------------------------------------------------------------
 echo "Uninstalling old versions of Docker, if any."
 sudo apt-get remove docker docker-engine docker.io containerd runc
@@ -64,37 +62,28 @@ echo
 sudo apt-get update
 echo Setting up the repository, and downloading the dependencies...
 sudo apt-get install -y \
-    ca-certificates \
-    curl \
-    gnupg \
-    lsb-release
+  ca-certificates \
+  curl \
+  gnupg \
+  lsb-release
 
 echo Adding Docker’s official GPG key...
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
 sudo apt-get update
 echo Installing Docker Engine and CLI components...
 sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 echo Starting Docker service....
 sudo service docker start
+
 #waiting for docker to start...
-hour=0
-min=0
 sec=30
-while [ $hour -ge 0 ]; do
-    while [ $min -ge 0 ]; do
-        while [ $sec -ge 0 ]; do
-            echo -ne "  Waiting... ${sec}s\033[0K\r"
-            let "sec=sec-1"
-            sleep 1
-        done
-        sec=59
-        let "min=min-1"
-    done
-    min=59
-    let "hour=hour-1"
+while [ $sec -ge 0 ]; do
+  echo -ne "  Waiting... ${sec}s\033[0K\r"
+  let "sec=sec-1"
+  sleep 1
 done
 
 echo Running sample container... You should see Hello World from docker.
