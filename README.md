@@ -2,7 +2,20 @@
 
 ## Instructions
 
-### Note this Script only works on Ubuntu 20.04.4LTS
+### This Script only works on Ubuntu 20.04.4LTS
+
+Before you begin make sure you have:
+
+<ul>
+<li>
+WSL installed, visit <a href="https://docs.microsoft.com/en-us/windows/wsl/install">https://docs.microsoft.com/en-us/windows/wsl/install</a> for more details.
+</li>
+<li>Updated WSL kernel to version 2.</li>
+<li>You are running Ubuntu 20.04.4LTS.</li>
+</ul>
+
+Then:
+
 <ol>
 <li>
 Clone the repository from your WSL distro.
