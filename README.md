@@ -32,4 +32,8 @@ Install <code>sudo ./install.sh</code>
 </li>
 </ol>
 
+Or just run the command below:
+
+<code>git clone https://github.com/GabrielJuliao/wsl-docker-install && cd wsl-docker-install && chmod +x install.sh && sudo ./install.sh</code>
+
 <b>Note:</b> this script must be run as root.
