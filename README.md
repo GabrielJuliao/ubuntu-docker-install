@@ -1,10 +1,10 @@
-# wsl-docker-install
+# ubuntu-docker-install
 
 ## Instructions
 
-### This Script only works on Ubuntu 20.04.4LTS
+### This Script was only tested on Ubuntu 20.04.4LTS
 
-Before you begin make sure you have:
+If your are using this on WSL make sure you have:
 
 <ul>
 <li>
@@ -18,7 +18,7 @@ Then:
 
 <ol>
 <li>
-Clone the repository from your WSL distro.
+Clone the repository from your distro.
 </li>
 <li>
 Change your location to the script path <code>cd wsl-docker-install
