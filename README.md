@@ -11,7 +11,7 @@ If your are using this on WSL make sure you have:
 WSL installed, visit <a href="https://docs.microsoft.com/en-us/windows/wsl/install">https://docs.microsoft.com/en-us/windows/wsl/install</a> for more details.
 </li>
 <li>Updated WSL kernel to version 2.</li>
-<li>You are running Ubuntu 20.04.4LTS.</li>
+<li>You are running Ubuntu 20.04.4LTS or above.</li>
 </ul>
 
 Then:
@@ -21,19 +21,16 @@ Then:
 Clone the repository from your distro.
 </li>
 <li>
-Change your location to the script path <code>cd wsl-docker-install
+Change your location to the script path: <code>cd ubuntu-docker-install
 </code>
 </li>
 <li>
-Give appropriate permissions <code>chmod +x install.sh</code>
+Give appropriate permissions: <code>chmod +x install.sh</code>
 </li>
 <li>
-Install <code>sudo ./install.sh</code>
+Install: <code>sudo ./install.sh</code> 
+or if you are using WSL: <code>sudo ./install.sh --wsl</code>
 </li>
 </ol>
-
-Or just run the command below:
-
-<code>git clone https://github.com/GabrielJuliao/wsl-docker-install && cd wsl-docker-install && chmod +x install.sh && sudo ./install.sh</code>
 
 <b>Note:</b> this script must be run as root.

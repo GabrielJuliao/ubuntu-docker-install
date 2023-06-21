@@ -1,5 +1,5 @@
 #!/bin/bash
-printf "WSL Docker Install v0.1\nNote: this script was only tested in Ubuntu 20.04.4LTS for WSL\n"
+printf "Ubuntu Docker Install v0.1\nNote: this script was only tested in Ubuntu 20.04.4LTS\n"
 # Init
 FILE="/tmp/out.$$"
 GREP="/bin/grep"
@@ -10,9 +10,22 @@ if [[ $EUID -ne 0 ]]; then
   exit 1
 fi
 
+# Boolean variable
+isWsl=false
+
+# Iterate through command-line arguments
+for arg in "$@"; do
+  # Check if the argument is "--wsl"
+  if [ "$arg" == "--wsl" ]; then
+    isWsl=true
+  fi
+done
+
 printf "Script created by Gabriel Juliao. \nSee more on: https://github.com/GabrielJuliao \n\n"
 
 #DNS CONFIGURATION INIT-----------------------------------------------------------------------
+
+if [ "$isWsl" = true ]; then
 
 #resolv.conf attr
 echo "Starting DNS configuration..."
@@ -53,6 +66,7 @@ echo Current: $WSL_CONF
 echo Expected: $EXPECTED_WSL_CONF
 echo
 
+fi
 #DNS CONFIGURATION END-----------------------------------------------------------------------
 
 #DOCKER INSTALL INIT--------------------------------------------------------------------------
