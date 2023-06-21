@@ -17,12 +17,12 @@ printf "Script created by Gabriel Juliao. \nSee more on: https://github.com/Gabr
 #resolv.conf attr
 echo "Starting DNS configuration..."
 
-VAR_I=$(sudo lsattr /etc/resolv.conf)
+VAR_I=$(lsattr /etc/resolv.conf)
 EXPECTED_VAR_I="----i---------e----- /etc/resolv.conf"
 
 if [[ "$VAR_I" == "$EXPECTED_VAR_I" ]]; then
   echo "Your resolv.conf is immutable, removing atribute..."
-  sudo chattr -i /etc/resolv.conf
+  chattr -i /etc/resolv.conf
   printf "Done! \n\n"
 fi
 
@@ -30,9 +30,9 @@ fi
 DNS_CONFIG=$(cat /etc/resolv.conf)
 EXPECTED_DNS_CONFIG="nameserver 1.1.1.1"
 
-sudo rm /etc/resolv.conf
-sudo bash -c 'echo "nameserver 1.1.1.1" > /etc/resolv.conf'
-sudo chattr +i /etc/resolv.conf
+rm /etc/resolv.conf
+bash -c 'echo "nameserver 1.1.1.1" > /etc/resolv.conf'
+chattr +i /etc/resolv.conf
 
 if [[ "$DNS_CONFIG" == "$EXPECTED_DNS_CONFIG" ]]; then
   printf "Your DNS has been successfully configured with the following configuration:\n"
@@ -47,8 +47,8 @@ WSL_CONF=$(cat /etc/wsl.conf)
 EXPECTED_WSL_CONF="[network] generateResolvConf = false"
 
 echo "Disabling WSL generateResolvConf..."
-sudo bash -c 'echo "[network]" > /etc/wsl.conf'
-sudo bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
+bash -c 'echo "[network]" > /etc/wsl.conf'
+bash -c 'echo "generateResolvConf = false" >> /etc/wsl.conf'
 echo Current: $WSL_CONF
 echo Expected: $EXPECTED_WSL_CONF
 echo
@@ -57,26 +57,26 @@ echo
 
 #DOCKER INSTALL INIT--------------------------------------------------------------------------
 echo "Uninstalling old versions of Docker, if any."
-sudo apt-get remove docker docker-engine docker.io containerd runc
+apt-get remove docker docker-engine docker.io containerd runc
 echo
-sudo apt-get update
+apt-get update
 echo Setting up the repository, and downloading the dependencies...
-sudo apt-get install -y \
+apt-get install -y \
   ca-certificates \
   curl \
   gnupg \
   lsb-release
 
 echo Adding Docker’s official GPG key...
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
-sudo apt-get update
+  $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list >/dev/null
+apt-get update
 echo Installing Docker Engine and CLI components...
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 echo Starting Docker service....
-sudo service docker start
+service docker start
 
 #waiting for docker to start...
 sec=30
@@ -87,5 +87,8 @@ while [ $sec -ge 0 ]; do
 done
 
 echo Running sample container... You should see Hello World from docker.
-sudo docker run hello-world
+groupadd docker
+usermod -aG docker $USER
+newgrp docker
+docker run hello-world
 echo DONE!
