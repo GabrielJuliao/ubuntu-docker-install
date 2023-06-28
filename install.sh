@@ -103,6 +103,7 @@ done
 echo Running sample container... You should see Hello World from docker.
 groupadd docker
 usermod -aG docker $USER
-newgrp docker
 docker run hello-world
 echo DONE!
+
+printf "Run the command: 'newgrp docker' as a normal user (aka no sudo/root)\n"
