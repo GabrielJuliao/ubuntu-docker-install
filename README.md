@@ -29,7 +29,6 @@ Give appropriate permissions: <code>chmod +x install.sh</code>
 </li>
 <li>
 Install: <code>sudo ./install.sh</code> 
-or if you are using WSL: <code>sudo ./install.sh --wsl</code>
 </li>
 </ol>
 
