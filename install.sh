@@ -37,9 +37,10 @@ while [ $sec -ge 0 ]; do
 done
 
 echo Running sample container... You should see Hello World from docker.
-groupadd docker
-usermod -aG docker $USER
 docker run hello-world
 echo DONE!
-
-printf "Run the command: 'newgrp docker' as a normal user (aka no sudo/root)\n"
+ 
+printf "Run the below commands as a normal user:\n"
+printf "sudo groupadd docker"
+printf "sudo usermod -aG docker $USER"
+printf "newgrp docker"
