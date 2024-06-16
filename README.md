@@ -1,5 +1,9 @@
 # ubuntu-docker-install
 
+### ⚠️ Warning
+
+This repository has been deprecated in favor of [sh-utils](https://github.com/GabrielJuliao/sh-utils).
+
 ## Instructions
 
 ### This Script was only tested on Ubuntu 20.04.4LTS
